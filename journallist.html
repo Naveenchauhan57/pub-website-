@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rudra Journals - Academic Journal Subscription Portal</title>
+    <meta name="description" content="Subscribe to 1000+ academic journals across Medical, Pharmacy, Nursing, and more. Premium print journal subscriptions for college libraries and institutions.">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        :root {
+            --primary: #4a90e2;
+            --background: #f5f7fa;
+            --text: #333;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --nav-bg: #2c3e50;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Navigation Styles */
+        .nav-container {
+            background: var(--nav-bg);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px var(--shadow);
+        }
+
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 0 20px;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: white;
+            padding: 40px 0;
+            box-shadow: 0 2px 10px var(--shadow);
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 2.5em;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .journal-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px var(--shadow);
+        }
+
+        .category-select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .journals-list {
+            max-height: 600px;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .journal-item {
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .journal-item:hover {
+            background: #f0f5ff;
+            transform: translateX(5px);
+        }
+
+        .journal-item.selected {
+            background: #e3efff;
+            border-color: var(--primary);
+        }
+
+        .enquiry-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px var(--shadow);
+            position: sticky;
+            top: 90px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .selected-journals {
+            margin: 15px 0;
+            padding: 10px;
+            background: #f5f7fa;
+            border-radius: 5px;
+            min-height: 100px;
+        }
+
+        button {
+            background: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #357abd;
+        }
+
+        .instructions {
+            margin-top: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px var(--shadow);
+        }
+
+        .instructions h2 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .instructions ol {
+            padding-left: 20px;
+        }
+
+        .instructions li {
+            margin-bottom: 10px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-container">
+        <div class="nav-content">
+            <a href="#" class="logo">Rudra Journals</a>
+            <ul class="nav-links">
+                <li><a href="Index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="journallist.html">Journals List</a></li>
+                <li><a href="publicationpage.html">Article Submission</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header>
+        <div class="container">
+            <h1>Academic Journal Subscription Portal</h1>
+            <p>Access 1000+ premium journals for your institution or library</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="main-content">
+            <div class="journal-section fade-in">
+                <select class="category-select" id="categorySelect">
+                    <option value="all">All Categories</option>
+                    <option value="pharmacy">Pharmacy Journals</option>
+                    <option value="medical">Medical Sciences</option>
+                    <option value="nursing">Nursing Studies</option>
+                    <option value="chemistry">Chemistry</option>
+                    <option value="biology">Biology</option>
+                </select>
+
+                <div class="journals-list" id="journalsList">
+                    <!-- Dynamically populated -->
+                </div>
+            </div>
+
+            <div class="enquiry-section fade-in">
+                <h2>Subscription Enquiry</h2>
+                <form id="enquiryForm">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Institution</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Selected Journals</label>
+                        <div class="selected-journals" id="selectedJournals">
+                            <!-- Dynamically populated -->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Additional Message</label>
+                        <textarea rows="4"></textarea>
+                    </div>
+                    <button type="submit">Send Enquiry</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h2>How to Submit Your Enquiry</h2>
+            <ol>
+                <li>Browse through our comprehensive list of journals by category</li>
+                <li>Click on journals to select/deselect them for your subscription</li>
+                <li>Fill in your contact information in the enquiry form</li>
+                <li>Review your selected journals in the form</li>
+                <li>Add any specific requirements or questions in the message box</li>
+                <li>Click "Send Enquiry" to submit your request</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        // Sample journal data - In production, this would come from a database
+        const journals = {
+            pharmacy: [
+                "International Journal of Pharmacy Practice",
+                "Journal of Clinical Pharmacy and Therapeutics",
+                "European Journal of Hospital Pharmacy"
+                // Add more journals...
+            ],
+            medical: [
+                "The New England Journal of Medicine",
+                "The Lancet",
+                "British Medical Journal"
+                // Add more journals...
+            ],
+            nursing: [
+                "Journal of Advanced Nursing",
+                "Nursing Science Quarterly",
+                "International Journal of Nursing Studies"
+                // Add more journals...
+            ]
+            // Add more categories...
+        };
+
+        let selectedJournals = new Set();
+
+        function populateJournals(category) {
+            const list = document.getElementById('journalsList');
+            list.innerHTML = '';
+            
+            const journalsToShow = category === 'all' 
+                ? Object.values(journals).flat() 
+                : journals[category] || [];
+
+            journalsToShow.forEach(journal => {
+                const div = document.createElement('div');
+                div.className = `journal-item ${selectedJournals.has(journal) ? 'selected' : ''}`;
+                div.textContent = journal;
+                div.onclick = () => toggleJournal(journal, div);
+                list.appendChild(div);
+            });
+        }
+
+        function toggleJournal(journal, element) {
+            if (selectedJournals.has(journal)) {
+                selectedJournals.delete(journal);
+                element.classList.remove('selected');
+            } else {
+                selectedJournals.add(journal);
+                element.classList.add('selected');
+            }
+            updateSelectedJournals();
+        }
+
+        function updateSelectedJournals() {
+            const container = document.getElementById('selectedJournals');
+            container.innerHTML = Array.from(selectedJournals)
+                .map(journal => `<div class="journal-item">${journal}</div>`)
+                .join('');
+        }
+
+        // Event Listeners
+        document.getElementById('categorySelect').addEventListener('change', (e) => {
+            populateJournals(e.target.value);
+        });
+
+        document.getElementById('enquiryForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Enquiry submitted successfully! We will contact you soon.');
+        });
+
+        // Initial population
+        populateJournals('all');
+    </script>
+</body>
+</html>
